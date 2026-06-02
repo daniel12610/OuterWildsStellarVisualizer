@@ -1,16 +1,12 @@
 import { useFBX } from "@react-three/drei";
 
-function StellarBody({ name, modelPath, scale, position }) {
+function StellarBody({ name, modelPath, scale }) {
   const model = useFBX(modelPath);
 
   return (
     <primitive
       object={model}
       scale={scale}
-      position={position}
-      onClick={() => {
-        console.log(`${name} clicked`);
-      }}
     />
   );
 }

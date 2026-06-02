@@ -1,6 +1,9 @@
 import { Canvas } from "@react-three/fiber";
 import { useFBX, OrbitControls } from "@react-three/drei";
 import StellarBody from "./components/StellarBody";
+import OrbitingBody from "./components/OrbitingBody";
+import { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 import "./App.css";
 
 function PlanetModel() {
@@ -31,7 +34,7 @@ function App() {
         <directionalLight color="white" position={[0, 10, 0]} intensity={100} />
 
         <axesHelper args={[20]} />
-        <gridHelper args={[500, 20]} />
+        <gridHelper args={[500, 4]} />
 
         {/* Sun */}
         <mesh position={[0, 0, 0]}>
@@ -40,43 +43,48 @@ function App() {
         </mesh>
 
         {/* Hourglass Twins */}
-        <StellarBody
+        <OrbitingBody
           name={"Hourglass Twins"}
           modelPath={"/models/Proxy_HGT.fbx"}
           scale={0.01}
-          position={[25, 0, 0]}
+          radius={[25]}
+          speed={0.1}
         />
 
         {/* Timber Hearth */}
-        <StellarBody
-          name={"Timber Hearth"}
-          modelPath={"/models/Proxy_TH.fbx"}
+        <OrbitingBody
+          name="Timber Hearth"
+          modelPath="/models/Proxy_TH.fbx"
           scale={0.01}
-          position={[50, 0, 0]}
+          radius={50}
+          speed={0.1}
         />
 
         {/* Brittle Hollow */}
-        <StellarBody
+        <OrbitingBody
           name={"Brittle Hollow"}
           modelPath={"/models/Proxy_BH.fbx"}
           scale={0.01}
-          position={[75, 0, 0]}
+          radius={75}
+          speed={0.1}
         />
 
         {/* Giant's Deep */}
-        <StellarBody
+        <OrbitingBody
           name={"Giant's Deep"}
           modelPath={"/models/Proxy_GD.fbx"}
           scale={0.008}
-          position={[100, 0, 0]}
+          radius={100}
+          speed={0.1}
         />
 
         {/* Dark Bramble */}
-        <StellarBody
+        <OrbitingBody
           name={"Dark Bramble"}
           modelPath={"/models/Proxy_DB.fbx"}
           scale={0.01}
-          position={[125, 0, 0]}
+          radius={125}
+          speed={0.1}
         />
 
         <OrbitControls minDistance={10} maxDistance={250} />
