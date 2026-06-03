@@ -2,6 +2,9 @@ import { Canvas } from "@react-three/fiber";
 import { useFBX, OrbitControls } from "@react-three/drei";
 import StellarBody from "./components/StellarBody";
 import OrbitingBody from "./components/OrbitingBody";
+
+import OrbitRing from "./components/OrbitRing";
+
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import "./App.css";
@@ -47,11 +50,12 @@ function App() {
           name={"Hourglass Twins"}
           modelPath={"/models/Proxy_HGT.fbx"}
           scale={0.01}
-          radius={[25]}
+          radius={25}
           speed={0.1}
         />
 
         {/* Timber Hearth */}
+
         <OrbitingBody
           name="Timber Hearth"
           modelPath="/models/Proxy_TH.fbx"
