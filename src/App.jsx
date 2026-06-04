@@ -1,97 +1,88 @@
 import { Canvas } from "@react-three/fiber";
-import { useFBX, OrbitControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import StellarBody from "./components/StellarBody";
 import OrbitingBody from "./components/OrbitingBody";
-
 import OrbitRing from "./components/OrbitRing";
-
-import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useAudioUnlock } from "./components/AudioUnlock";
+import { useState } from "react";
 import "./App.css";
 
-function PlanetModel() {
-  const model = useFBX("/models/Proxy_TH.fbx");
-
-  return <primitive object={model} scale={0.01} position={[0, 0, 0]} />;
-}
-
 function App() {
+  const [started, setStarted] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  useAudioUnlock();
+
   return (
     <div className="app-container">
-      {/* Title text */}
       <div className="overlay">
         <h1>Outer Wilds Solar System</h1>
       </div>
 
-      {/* 3D Scene */}
-      <Canvas
-        camera={{
-          position: [0, 10, 100],
-          fov: 45,
-        }}
-      >
+      {!started && (
+        <div className="start-overlay" onClick={() => setPlaying((p) => !p)}>
+          {playing ? "Mute" : "Play"}
+        </div>
+      )}
+
+      <Canvas camera={{ position: [0, 10, 100], fov: 45 }}>
         <color attach="background" args={["black"]} />
-
         <ambientLight intensity={1} />
-
-        <directionalLight color="white" position={[0, 10, 0]} intensity={100} />
-
+        <directionalLight color="white" position={[0, 10, 0]} intensity={10} />
         <axesHelper args={[20]} />
         <gridHelper args={[500, 4]} />
 
-        {/* Sun */}
         <mesh position={[0, 0, 0]}>
           <sphereGeometry args={[15, 32, 32]} />
           <meshBasicMaterial color="orange" />
         </mesh>
 
-        {/* Hourglass Twins */}
         <OrbitingBody
-          name={"Hourglass Twins"}
-          modelPath={"/models/Proxy_HGT.fbx"}
-          scale={0.01}
+          name="Hourglass Twins"
+          modelPath="/models/Proxy_HGT.glb"
+          scale={0.012}
           radius={25}
-          speed={0.1}
+          speed={0.2}
+          sound="/sound/TravelerTheme_drums.ogg"
+          playing={playing}
         />
-
-        {/* Timber Hearth */}
-
         <OrbitingBody
           name="Timber Hearth"
-          modelPath="/models/Proxy_TH.fbx"
+          modelPath="/models/Proxy_TH.glb"
           scale={0.01}
           radius={50}
-          speed={0.1}
+          speed={0.12}
+          sound="/sound/TravelerTheme_whistling.ogg"
+          playing={playing}
         />
-
-        {/* Brittle Hollow */}
         <OrbitingBody
-          name={"Brittle Hollow"}
-          modelPath={"/models/Proxy_BH.fbx"}
-          scale={0.01}
+          name="Brittle Hollow"
+          modelPath="/models/Proxy_BH.glb"
+          scale={0.011}
           radius={75}
-          speed={0.1}
+          speed={0.09}
+          sound="/sound/TravelerTheme_banjo.ogg"
+          playing={playing}
         />
-
-        {/* Giant's Deep */}
         <OrbitingBody
-          name={"Giant's Deep"}
-          modelPath={"/models/Proxy_GD.fbx"}
-          scale={0.008}
+          name="Giant's Deep"
+          modelPath="/models/Proxy_GD.glb"
+          scale={0.015}
           radius={100}
-          speed={0.1}
+          speed={0.06}
+          sound="/sound/TravelerTheme_flute.ogg"
+          playing={playing}
         />
-
-        {/* Dark Bramble */}
         <OrbitingBody
-          name={"Dark Bramble"}
-          modelPath={"/models/Proxy_DB.fbx"}
-          scale={0.01}
+          name="Dark Bramble"
+          modelPath="/models/Proxy_DB.glb"
+          scale={0.02}
           radius={125}
-          speed={0.1}
+          speed={0.04}
+          sound="/sound/TravelerTheme_harmonica.ogg"
+          playing={playing}
         />
 
-        <OrbitControls minDistance={10} maxDistance={250} />
+        <OrbitControls minDistance={1} maxDistance={250} />
       </Canvas>
     </div>
   );

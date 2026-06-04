@@ -36,3 +36,23 @@ canvas {
 
   pointer-events: none;
 }
+
+.start-overlay {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+}
+
+.start-overlay:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

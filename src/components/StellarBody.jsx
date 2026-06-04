@@ -1,14 +1,9 @@
-import { useFBX } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 
 function StellarBody({ name, modelPath, scale }) {
-  const model = useFBX(modelPath);
+  const { scene } = useGLTF(modelPath);
 
-  return (
-    <primitive
-      object={model}
-      scale={scale}
-    />
-  );
+  return <primitive object={scene} scale={scale} />;
 }
 
 export default StellarBody;
