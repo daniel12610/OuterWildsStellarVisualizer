@@ -24,7 +24,7 @@ function App() {
         </div>
       )}
 
-      <Canvas camera={{ position: [0, 10, 100], fov: 45 }}>
+      <Canvas camera={{ position: [0, 500, 0], fov: 60 }}>
         <color attach="background" args={["black"]} />
         <ambientLight intensity={1} />
         <directionalLight color="white" position={[0, 10, 0]} intensity={10} />
@@ -32,15 +32,23 @@ function App() {
         <gridHelper args={[500, 4]} />
 
         <mesh position={[0, 0, 0]}>
-          <sphereGeometry args={[15, 32, 32]} />
+          <sphereGeometry args={[25, 32, 32]} />
           <meshBasicMaterial color="orange" />
         </mesh>
+
+        <OrbitingBody
+          name="Solar Station"
+          modelPath="/models/Proxy_SS.glb"
+          scale={0.009}
+          radius={30}
+          speed={0.2}
+        />
 
         <OrbitingBody
           name="Hourglass Twins"
           modelPath="/models/Proxy_HGT.glb"
           scale={0.012}
-          radius={25}
+          radius={45}
           speed={0.2}
           sound="/sound/TravelerTheme_drums.ogg"
           playing={playing}
@@ -49,7 +57,7 @@ function App() {
           name="Timber Hearth"
           modelPath="/models/Proxy_TH.glb"
           scale={0.01}
-          radius={50}
+          radius={80}
           speed={0.12}
           sound="/sound/TravelerTheme_whistling.ogg"
           playing={playing}
@@ -58,7 +66,7 @@ function App() {
           name="Brittle Hollow"
           modelPath="/models/Proxy_BH.glb"
           scale={0.011}
-          radius={75}
+          radius={120}
           speed={0.09}
           sound="/sound/TravelerTheme_banjo.ogg"
           playing={playing}
@@ -66,8 +74,8 @@ function App() {
         <OrbitingBody
           name="Giant's Deep"
           modelPath="/models/Proxy_GD.glb"
-          scale={0.015}
-          radius={100}
+          scale={0.009}
+          radius={160}
           speed={0.06}
           sound="/sound/TravelerTheme_flute.ogg"
           playing={playing}
@@ -76,13 +84,13 @@ function App() {
           name="Dark Bramble"
           modelPath="/models/Proxy_DB.glb"
           scale={0.02}
-          radius={125}
+          radius={220}
           speed={0.04}
           sound="/sound/TravelerTheme_harmonica.ogg"
           playing={playing}
         />
 
-        <OrbitControls minDistance={1} maxDistance={250} />
+        <OrbitControls minDistance={1} maxDistance={500} />
       </Canvas>
     </div>
   );
