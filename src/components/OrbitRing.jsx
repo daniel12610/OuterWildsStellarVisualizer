@@ -1,25 +1,20 @@
 import { Line } from "@react-three/drei";
+import { useMemo } from "react";
 
-function OrbitRing({radius}) {
-  const segments = 64;
+function OrbitRing({ radius }) {
+  const points = useMemo(() => {
+    const segments = 48;
 
-  const angleIncrement = 360 / segments;
-  
-  const positionArray = [];
+    return Array.from({ length: segments + 1 }, (_, i) => {
+      const t = (i / segments) * Math.PI * 2;
+      const x = radius * Math.cos(t);
+      const z = radius * Math.sin(t);
+      return [x, 0, z];
+    });
 
-  for (let i = 0; i <= segments; i++) {
-    let angle = angleIncrement * i;
-    const angleInRadians = angle * (Math.PI / 180);
+  }, [radius]);
 
-    const x = radius * Math.cos(angleInRadians);
-    const z = radius * Math.sin(angleInRadians);
-
-    positionArray.push([x, 0, z]);
-    //console.log(`X: ${x}, Z: ${z}`);
-  }
-
-  return <Line points={positionArray}
-  lineWidth={0.5} />;
+  return <Line points={points} lineWidth={0.5} />;
 }
 
 export default OrbitRing;

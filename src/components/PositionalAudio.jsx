@@ -6,7 +6,7 @@ export default function PositionalSound({ url, playing }) {
 
   useEffect(() => {
     if (!audioRef.current) return;
-    audioRef.current.setVolume(0.2);      
+    audioRef.current.setVolume(0.5);      
     audioRef.current.setRolloffFactor(2);  
   }, []);
 
@@ -23,7 +23,7 @@ export default function PositionalSound({ url, playing }) {
     <PositionalAudio
       ref={audioRef}
       url={url}
-      distance={5}
+      distance={2}
       loop
     />
   );
